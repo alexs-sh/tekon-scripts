@@ -1,0 +1,74 @@
+TEKON_ADDRESS=udp:10.0.0.3:51960@9
+TEKON_TIMEOUT_MS=500
+TEKON_SLEEP=0.25
+TEKON_WORKDIR=/tmp/tekon_master
+
+TEKON_MSR_BACKEND=/usr/bin/tekon_msr
+TEKON_ARCH_BACKEND=/usr/bin/tekon_arch
+TEKON_TIMESYNC_BACKEND=/usr/bin/tekon_sync
+
+TEKON_ARCH_POLL_TIME=30
+TEKON_TIMESYNC_TIMEOUT=15
+
+TEKON_TAGS=( 
+
+
+# Устройство №1
+    "name=1/sys/sn    tekon=1:0xF001:0:F"
+    "name=1/sys/date  tekon=1:0xF017:0:D"
+    "name=1/sys/time  tekon=1:0xF018:0:T"
+
+
+# Устройство №2
+    "name=2/sys/sn    tekon=2:0xF001:0:F"
+    "name=2/sys/date  tekon=2:0xF017:0:D"
+    "name=2/sys/time  tekon=2:0xF018:0:T"
+
+
+# Устройство №3
+    "name=3/sys/sn    tekon=3:0xF001:0:H"
+    "name=3/sys/date  tekon=3:0xF017:0:D"
+    "name=3/sys/time  tekon=3:0xF018:0:T"
+    "name=3/06_Rтек   tekon=3:0x0405:0:F"
+    "name=3/06_Rо     tekon=3:0x801D:0:F"
+    "name=3/06_темп   tekon=3:0x8020:0:F"
+    "name=3/06_обр    tekon=3:0x8021:0:B"
+    "name=3/08_мгн    tekon=3:0x8027:0:F"
+    "name=3/08_всп1   tekon=3:0x802B:0:F"
+    "name=3/08_всп2   tekon=3:0x802B:1:F"
+    "name=3/08_всп3   tekon=3:0x802B:2:F"
+    "name=3/08_всп4   tekon=3:0x802B:3:F"
+
+
+# Устройство №4
+    "name=4/sys/sn    tekon=4:0xF001:0:H"
+    "name=4/sys/date  tekon=4:0xF017:0:D"
+    "name=4/sys/time  tekon=4:0xF018:0:T"
+
+
+# Устройство №5
+    "name=5/sys/sn    tekon=5:0xF001:0:H"
+    "name=5/sys/date  tekon=5:0xF017:0:D"
+    "name=5/sys/time  tekon=5:0xF018:0:T"
+
+)
+
+TEKON_ARCH=( 
+
+    "name=1/dummy parameter=1:0x801C:0:12:F       interval=m:12     datetime=1:0xF017:0xF018"
+    "name=2/dummy parameter=2:0x801C:0:12:F       interval=m:12     datetime=2:0xF017:0xF018"
+
+    "name=3/arch801c parameter=3:0x801C:0:12:F    interval=m:12     datetime=3:0xF017:0xF018"
+    "name=3/arch8017 parameter=3:0x8017:0:1536:F  interval=h:1536   datetime=3:0xF017:0xF018"
+    "name=3/arch8055 parameter=3:0x8055:0:366:F   interval=d:366    datetime=3:0xF017:0xF018"
+
+    "name=4/arch8245 parameter=4:0x8245:0:1440:F  interval=i:1440:5 datetime=4:0xF017:0xF018"
+)
+
+TEKON_TIMESYNC=(
+  "datetime=1:0xF017:0xF018 password=00000001 checks=difference:20 minutes:1 indexes"
+  "datetime=2:0xF017:0xF018 password=00000001 checks=difference:20 minutes:1 indexes"
+  "datetime=3:0xF017:0xF018 password=00000001 checks=difference:20 minutes:1 indexes"
+  "datetime=4:0xF017:0xF018 password=00000001 checks=difference:20 minutes:1 indexes"
+  "datetime=5:0xF017:0xF018 password=00000001 checks=difference:20 minutes:1 indexes"
+)

@@ -1,0 +1,33 @@
+image: debian:9
+pipelines:
+  default:
+    - step:
+        name: check
+        script:
+          - apt update -y && apt install -y shellcheck locales
+          
+          # Настроить локали 
+          - echo "en_US.UTF-8 UTF-8"  > /etc/locale.gen
+          - echo "ru_RU.UTF-8 UTF-8"  >> /etc/locale.gen
+          - locale-gen
+          - export LC_ALL=en_US.UTF-8
+
+          # Собрать все в одно
+          - cd master
+          - ./build.sh
+          - cd -
+
+          - cd usb
+          - ./build.sh
+          - cd -
+            
+          # Проверить результирующие файлы
+          - shellcheck --exclude=1090 master/tekon_master 
+          - shellcheck usb/tekon_usb 
+
+options:
+  docker: true
+
+#ru_RU.UTF-8
+#en_US.UTF-8
+
