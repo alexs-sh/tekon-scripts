@@ -345,7 +345,7 @@ arch_read()
   fi
 
   ARCH_LAST_READ_=${now}
-  ARCH_CURRENT_=$(("$ARCH_CURRENT_" + 1))
+  ARCH_CURRENT_="$((ARCH_CURRENT_ + 1))"
   if [ ${ARCH_CURRENT_} -ge "${#ARCH_NAME_[@]}" ]; then
     ARCH_CURRENT_=0
     ARCH_INIT_DONE_=1
